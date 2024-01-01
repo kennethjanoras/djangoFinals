@@ -141,6 +141,5 @@ class TaskLogDeleteView(DeleteView):
     model = TaskLog
     template_name = 'tsklog_del.html'
     success_url = reverse_lazy('tsklog-list')
+    
 
-
-# Similar classes for Employee, Project, Task, and TaskLog...

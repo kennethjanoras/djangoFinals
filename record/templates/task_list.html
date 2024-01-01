@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'task-add' %}" class="custom-btn btn btn-primary">Add New Task</a><br>
+<section class="tasks-container">
+    <table class="styled-table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Deadline</th>
+                <th>Project</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in object_list %}
+            <tr>
+                <td>{{ task.title }}</td>
+                <td>{{ task.description }}</td>
+                <td>{{ task.deadline }}</td>
+                <td>{{ task.project.name }}</td>
+                <td>
+                    <a href="{% url 'task-update' task.id %}">Edit</a> |
+                    <a href="{% url 'task-delete' task.id %}">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="5" style="text-align: center;">
+                    <p>No Records Found</p>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+<div>
+    {% include 'includes/pagination.html' %}
+</div>
+{% endblock %}

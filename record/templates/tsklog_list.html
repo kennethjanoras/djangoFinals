@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<a href="{% url 'tasklog-add' %}" class="custom-btn btn btn-primary">Add New Task Log</a><br>
+<section class="trainers-container">
+    <table class="styled-table">
+      <tbody>
+        <tr>
+          <th>Task</th>
+          <th>Log Date</th>
+          <th>Log Details</th>
+          <th>Action</th>
+        </tr>
+        {% for tasklog in object_list %}
+        <tr>
+          <td>{{ tasklog.task }}</td>
+          <td>{{ tasklog.log_date }}</td>
+          <td>{{ tasklog.log_details }}</td>
+          <td>
+            <a href="{% url 'tasklog-update' tasklog.id %}">Edit</a> |
+            <a href="{% url 'tasklog-delete' tasklog.id %}">Delete</a>
+          </td>
+        </tr>
+        {% empty %}
+                <tr>
+                <td colspan="4" style="text-align: center;">
+                    <p>No Records Found</p>
+                </td>
+                </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+</section>
+<div>
+    {% include 'includes/pagination.html' %}
+</div> 
+{% endblock %}
